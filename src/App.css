@@ -23,11 +23,11 @@
 /* VARIABLES */
 
 :root {
-  --main-color: #1a8fff;
+  --main-color: blue;
   --text-color: #777;
   --text-color-light: #ccc;
   --border-color: #eee;
-  --bg-color: #f9f9f9;
+  --bg-color: rgb(233, 226, 226);
   --neutral-color: #fff;
 }
 
@@ -104,6 +104,7 @@ main {
 .col-center {
   justify-content: center;
   text-align: center;
+  cursor: pointer;
 }
 
 .col-end {
@@ -219,7 +220,7 @@ main {
 }
 
 .calendar .body .cell:hover .bg, .calendar .body .selected .bg  {
-  opacity: 0.05;
+  opacity: 0.2;
   transition: .5s ease-in;
 }
 
@@ -280,7 +281,7 @@ h2{
 
 .fl-table thead th {
   color: #ffffff;
-  background: #4FC3A1;
+  background: #324960;
 }
 
 
@@ -431,4 +432,19 @@ h2{
 }
 .select-icon  .select2-search--dropdown {
 	display: none;
+}
+
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 30; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+  border: 1px solid black;
 }

@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import * as dateFns from "date-fns";
 import Modal from "./modal";
 import { ShowModal } from "../functions";
-const Calendar = ({ changeColor, toggleModal }) => {
+const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [jumpDate, setJumpDate] = useState(new Date());
   const [color, setColor] = useState("blue");
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy";
     return (
-      <div className="header row flex-middle">
+      <div
+        className="header row flex-middle"
+        style={{ borderBottom: "1px solid grey" }}
+      >
         <div className="col col-start">
           <div className="icon" onClick={prevMonth}>
             chevron_left
@@ -35,7 +39,11 @@ const Calendar = ({ changeColor, toggleModal }) => {
         </div>
       );
     }
-    return <div className="days row">{days}</div>;
+    return (
+      <div className="days row" style={{ color: "black" }}>
+        {days}
+      </div>
+    );
   };
   const renderCells = () => {
     const monthStart = dateFns.startOfMonth(currentMonth);
@@ -53,7 +61,7 @@ const Calendar = ({ changeColor, toggleModal }) => {
         const cloneDay = day;
         days.push(
           <div
-            style={{ height: "150px" }}
+            style={{ height: "150px", border: "1px solid grey" }}
             className={`col cell ${
               !dateFns.isSameMonth(day, monthStart)
                 ? "disabled"
@@ -75,6 +83,8 @@ const Calendar = ({ changeColor, toggleModal }) => {
                   border: "none",
                   width: "90%",
                   height: "10%",
+                  marginTop: "15px",
+                  marginLeft: "10px",
                 }}
                 onClick={() => [changeColor("blue"), toggleModal(true)]}
               ></button>
@@ -89,6 +99,7 @@ const Calendar = ({ changeColor, toggleModal }) => {
                   border: "none",
                   width: "90%",
                   height: "10%",
+                  marginLeft: "10px",
                 }}
                 onClick={() => [changeColor("lightGreen"), toggleModal(true)]}
               ></button>
@@ -103,6 +114,7 @@ const Calendar = ({ changeColor, toggleModal }) => {
                   border: "none",
                   width: "90%",
                   height: "10%",
+                  marginLeft: "10px",
                 }}
                 onClick={() => [changeColor("orange"), toggleModal(true)]}
               ></button>
@@ -117,6 +129,7 @@ const Calendar = ({ changeColor, toggleModal }) => {
                   border: "none",
                   width: "90%",
                   height: "10%",
+                  marginLeft: "10px",
                 }}
                 onClick={() => [changeColor("pink"), toggleModal(true)]}
               ></button>
@@ -146,11 +159,36 @@ const Calendar = ({ changeColor, toggleModal }) => {
   const prevMonth = () => {
     setCurrentMonth(dateFns.subMonths(currentMonth, 1));
   };
+
+  const jumpMonth = () => {
+    console.log(jumpDate);
+    setCurrentMonth(
+      dateFns.setMonth(new Date(jumpDate), new Date(jumpDate).getMonth())
+    );
+  };
   return (
     <div className="calendar">
-      {renderHeader()}
-      {renderDays()}
-      {renderCells()}
+      {modalToggled ? (
+        <div style={{ filter: "blur(2.5px)" }}>
+          <div style={{ padding: "5px" }}>
+            <input type="date" />
+            <button>Go</button>
+          </div>
+          {renderHeader()}
+          {renderDays()}
+          {renderCells()}
+        </div>
+      ) : (
+        <div>
+          <div style={{ padding: "5px" }}>
+            <input type="date" onChange={(e) => setJumpDate(e.target.value)} />
+            <button onClick={jumpMonth}>Go</button>
+          </div>
+          {renderHeader()}
+          {renderDays()}
+          {renderCells()}
+        </div>
+      )}
     </div>
   );
 };

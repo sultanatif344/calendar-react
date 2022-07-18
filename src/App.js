@@ -11,7 +11,11 @@ function App() {
   };
   return (
     <div className="App">
-      <Calendar changeColor={changeColor} toggleModal={setToggleModal} />
+      <Calendar
+        changeColor={changeColor}
+        toggleModal={setToggleModal}
+        modalToggled={toggleModal}
+      />
       {toggleModal ? (
         <Modal
           id={"calendar-modal"}
