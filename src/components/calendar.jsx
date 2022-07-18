@@ -66,7 +66,7 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
               !dateFns.isSameMonth(day, monthStart)
                 ? "disabled"
                 : dateFns.isSameDay(day, selectedDate)
-                ? "selected"
+                ? ""
                 : ""
             }`}
             key={day}
