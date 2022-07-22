@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
 import Modal from "./modal";
 import { ShowModal } from "../functions";
@@ -7,6 +7,16 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [jumpDate, setJumpDate] = useState(new Date());
   const [color, setColor] = useState("blue");
+  const [defaultValue, setDefaultValue] = useState("");
+  useEffect(() => {
+    const currentMonth = jumpDate.getMonth() + 1;
+    const formattedValue =
+      String(currentMonth).length == 1
+        ? jumpDate.getFullYear() + "-0" + currentMonth
+        : jumpDate.getFullYear() + "-" + currentMonth;
+    console.log(formattedValue);
+    setDefaultValue(formattedValue);
+  }, []);
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy";
     return (
@@ -61,7 +71,14 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
         const cloneDay = day;
         days.push(
           <div
-            style={{ height: "150px", border: "1px solid grey" }}
+            style={{
+              height: "140px",
+              border: "1px solid grey",
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              padding: "5px",
+            }}
             className={`col cell ${
               !dateFns.isSameMonth(day, monthStart)
                 ? "disabled"
@@ -82,8 +99,7 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
                   backgroundColor: "blue",
                   border: "none",
                   width: "90%",
-                  height: "10%",
-                  marginTop: "15px",
+                  height: "20%",
                   marginLeft: "10px",
                 }}
                 onClick={() => [changeColor("blue"), toggleModal(true)]}
@@ -91,14 +107,13 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
             ) : (
               <div></div>
             )}
-            <br />
             {dateFns.isSameMonth(day, monthStart) ? (
               <button
                 style={{
                   backgroundColor: "lightGreen",
                   border: "none",
                   width: "90%",
-                  height: "10%",
+                  height: "20%",
                   marginLeft: "10px",
                 }}
                 onClick={() => [changeColor("lightGreen"), toggleModal(true)]}
@@ -106,14 +121,13 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
             ) : (
               <div></div>
             )}
-            <br />
             {dateFns.isSameMonth(day, monthStart) ? (
               <button
                 style={{
                   backgroundColor: "orange",
                   border: "none",
                   width: "90%",
-                  height: "10%",
+                  height: "20%",
                   marginLeft: "10px",
                 }}
                 onClick={() => [changeColor("orange"), toggleModal(true)]}
@@ -121,14 +135,13 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
             ) : (
               <div></div>
             )}
-            <br />
             {dateFns.isSameMonth(day, monthStart) ? (
               <button
                 style={{
                   backgroundColor: "pink",
                   border: "none",
                   width: "90%",
-                  height: "10%",
+                  height: "20%",
                   marginLeft: "10px",
                 }}
                 onClick={() => [changeColor("pink"), toggleModal(true)]}
@@ -166,12 +179,16 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
       dateFns.setMonth(new Date(jumpDate), new Date(jumpDate).getMonth())
     );
   };
+
+  const handleChange = (e) => {
+    setJumpDate(e.target.value);
+  };
   return (
     <div className="calendar">
       {modalToggled ? (
         <div style={{ filter: "blur(2.5px)" }}>
           <div style={{ padding: "5px" }}>
-            <input type="date" />
+            <input type="month" id="start" name="start" />
             <button>Go</button>
           </div>
           {renderHeader()}
@@ -181,7 +198,13 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
       ) : (
         <div>
           <div style={{ padding: "5px" }}>
-            <input type="date" onChange={(e) => setJumpDate(e.target.value)} />
+            <input
+              type="month"
+              id="start"
+              name="start"
+              defaultValue={defaultValue}
+              onChange={(e) => handleChange(e)}
+            />
             <button onClick={jumpMonth}>Go</button>
           </div>
           {renderHeader()}
