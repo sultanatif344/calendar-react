@@ -203,9 +203,15 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
               id="start"
               name="start"
               defaultValue={defaultValue}
+              className="outline-none border text-center"
               onChange={(e) => handleChange(e)}
             />
-            <button onClick={jumpMonth}>Go</button>
+            <button
+              className="bg-black text-white w-20 ml-5 rounded-md"
+              onClick={jumpMonth}
+            >
+              Go
+            </button>
           </div>
           {renderHeader()}
           {renderDays()}
