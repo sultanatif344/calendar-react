@@ -8,7 +8,7 @@ const MultipleSelectButton = (props) => {
       onClick={props.onClick}
       className="relative bg-white border-2 border-slate-400 rounded-md cursor-pointer"
     >
-      <div className="p-1.5 px-5">{props.text}</div>
+      <div className="p-1.5 px-8">{props.text}</div>
       <span className="absolute right-4 top-2.5">
         <AiFillCaretDown />
       </span>

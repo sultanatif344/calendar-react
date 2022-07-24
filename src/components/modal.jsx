@@ -41,72 +41,86 @@ const Modal = ({ eventColor, toggleModal }) => {
             backgroundColor: "white",
             position: "fixed",
             top: "220px",
-            left: "400px",
-            width: "45%",
+            left: "300px",
+            width: "58%",
             padding: "10px",
-            height: "350px",
+            height: "300px",
             borderRadius: "5px",
           }}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <div
               style={{
-                width: "100%",
+                width: "10%",
                 border: "1px solid white",
-                height: "89px",
+                height: "80px",
                 backgroundColor: eventColor,
-                marginTop: "15%",
+                marginTop: "9.9%",
               }}
             ></div>
             <div
+              className="w-full absolute border-black h-1/5 top-0"
+              style={{ backgroundColor: "#324960" }}
+            >
+              <h1 className="text-3xl text-center text-white mt-3">
+                Event Details
+              </h1>
+            </div>
+            <div
               class="table-wrapper"
-              style={{ marginLeft: "3%", marginTop: "15%", width: "82%" }}
+              style={{ marginLeft: "3%", marginTop: "10%", width: "82%" }}
             >
               <table class="fl-table">
                 <thead>
                   <tr>
                     <th>RN</th>
-                    <th>LPN</th>
+                    <th>RN/LPN</th>
+                    <th>CRMA/PSS</th>
                     <th>CNA</th>
-                    <th>
-                      <div
-                        style={{
-                          border: "1px solid black",
-                          width: "60px",
-                          opacity: "0",
-                        }}
-                      ></div>
-                    </th>
+                    <th>CNA-M</th>
                     <th>Repeat This Needs List</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <td className="w-20">
                       <input
                         className="border-2 rounded-md border-slate-400 outline-none"
                         type="number"
-                        style={{ width: "40px" }}
+                        style={{ width: "80%" }}
                       />
                     </td>
-                    <td>
+                    <td className="w-20">
                       <input
                         className="border-2 rounded-md border-slate-400 outline-none"
                         type="number"
-                        style={{ width: "40px" }}
+                        style={{ width: "80%" }}
                       />
                     </td>
-                    <td>
+                    <td className="w-20">
                       <input
                         className="border-2 rounded-md border-slate-400 outline-none"
                         type="number"
-                        style={{ width: "40px" }}
+                        style={{ width: "80%" }}
                       />
                     </td>
-                    <td></td>
+                    <td className="w-20">
+                      <input
+                        className="border-2 rounded-md border-slate-400 outline-none"
+                        type="number"
+                        style={{ width: "80%" }}
+                      />
+                    </td>
+                    <td className="w-20">
+                      <input
+                        className="border-2 rounded-md border-slate-400 outline-none"
+                        type="number"
+                        style={{ width: "80%" }}
+                      />
+                    </td>
                     <td>
-                      <div className="flex">
-                        <div className="relative w-10/12 mr-5">
+                      <div className="flex justify-center">
+                        <div className="relative mr-5">
                           <MultipleSelectButton
                             text="Select Option"
                             onClick={() => {
@@ -163,7 +177,7 @@ const Modal = ({ eventColor, toggleModal }) => {
                         </div>
                         <input
                           type="date"
-                          className="w-32 rounded-md border-2 border-slate-400 pl-1 outline-none"
+                          className="w-32 rounded-md border-2 border-slate-400 pl-1 outline-none text-center"
                         />
                       </div>
                     </td>
@@ -177,8 +191,9 @@ const Modal = ({ eventColor, toggleModal }) => {
               style={{
                 width: "100px",
                 height: "40px",
-                backgroundColor: "black",
-                marginTop: "45px",
+                position: "relative",
+                right: "31px",
+                backgroundColor: "#324960",
                 border: "1px solid whitesmoke",
                 color: "white",
                 borderRadius: "5px",
