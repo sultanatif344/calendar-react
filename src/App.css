@@ -161,7 +161,6 @@ main {
 
 .calendar .body .cell {
   position: relative;
-  height: 5em;
   border-right: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;

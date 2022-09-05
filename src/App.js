@@ -10,11 +10,14 @@ function App() {
   };
   return (
     <div className="App">
+      {/* Main Calendar Component */}
       <Calendar
         changeColor={changeColor}
         toggleModal={setToggleModal}
         modalToggled={toggleModal}
       />
+
+      {/* Modal for event data saving */}
       {toggleModal ? (
         <Modal
           id={"calendar-modal"}

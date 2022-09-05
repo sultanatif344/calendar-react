@@ -3,10 +3,10 @@ import * as dateFns from "date-fns";
 
 const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const selectedDate = new Date();
   const [jumpDate, setJumpDate] = useState(new Date());
-  const [color, setColor] = useState("blue");
   const [defaultValue, setDefaultValue] = useState("");
+
   useEffect(() => {
     const currentMonth = jumpDate.getMonth() + 1;
     const formattedValue =
@@ -16,18 +16,17 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
     console.log(formattedValue);
     setDefaultValue(formattedValue);
   }, []);
+
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy";
     return (
-      <div
-        className="header row flex-middle"
-        style={{ borderBottom: "1px solid grey" }}
-      >
+      <div className="header row border-b-2 border-gray-100 flex-middle">
         <div className="col col-start">
           <div className="icon" onClick={prevMonth}>
             chevron_left
           </div>
         </div>
+        {/* Date Display */}
         <div className="col col-center">
           <span>{dateFns.format(currentMonth, dateFormat)}</span>
         </div>
@@ -37,6 +36,7 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
       </div>
     );
   };
+
   const renderDays = () => {
     const dateFormat = "EEEE";
     const days = [];
@@ -54,6 +54,8 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
       </div>
     );
   };
+
+  // Main Function That Renders cells correctly in calendar
   const renderCells = () => {
     const monthStart = dateFns.startOfMonth(currentMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
@@ -65,32 +67,25 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
     let day = startDate;
     let formattedDate = "";
     while (day <= endDate) {
+      // Render Cells as long as no of cells are less then the set no of cells to render here it is 36
       for (let i = 0; i < 36; i++) {
         formattedDate = dateFns.format(day, dateFormat);
-        const cloneDay = day;
         days.push(
           <div
-            style={{
-              height: "140px",
-              border: "1px solid grey",
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-              padding: "5px",
-            }}
             className={`col cell ${
               !dateFns.isSameMonth(day, monthStart)
                 ? "disabled"
                 : dateFns.isSameDay(day, selectedDate)
                 ? ""
                 : ""
-            }`}
+            } border border-gray-100 h-48 flex justify-center flex-col p-2`}
             key={day}
           >
             <span className="number">{formattedDate}</span>
             <span className="bg">{formattedDate}</span>
             <br />
 
+            {/* if cell is of same month else do not add button*/}
             {dateFns.isSameMonth(day, monthStart) ? (
               <div className="relative">
                 <input type="checkbox" className="top-2 left-4 absolute" />
@@ -104,6 +99,8 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
             ) : (
               <div></div>
             )}
+
+            {/* if cell is of same month else do not add button*/}
             {dateFns.isSameMonth(day, monthStart) ? (
               <div className="relative">
                 <input type="checkbox" className="top-2 left-4 absolute" />
@@ -117,6 +114,9 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
             ) : (
               <div></div>
             )}
+
+            {/* if cell is of same month else do not add button*/}
+
             {dateFns.isSameMonth(day, monthStart) ? (
               <div className="relative">
                 <input type="checkbox" className="top-2 left-4 absolute" />
@@ -130,6 +130,9 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
             ) : (
               <div></div>
             )}
+
+            {/* if cell is of same month else do not add button*/}
+
             {dateFns.isSameMonth(day, monthStart) ? (
               <div className="relative">
                 <input type="checkbox" className="top-2 left-4 absolute" />
@@ -137,8 +140,18 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
                   className="bg-pink-400 w-48 h-auto ml-1.5 text-xs text-white px-7 py-1.5 text-left"
                   onClick={() => [changeColor("pink"), toggleModal(true)]}
                 >
-                  Custom Shift | Design
+                  Custom Shift
                 </button>
+                <input
+                  type="number"
+                  placeholder="From"
+                  className="absolute top-1.5 right-14 w-1/5 text-xs"
+                />
+                <input
+                  type="number"
+                  placeholder="To"
+                  className="absolute top-1.5 right-2 w-1/5 text-xs"
+                />
               </div>
             ) : (
               <div></div>
@@ -157,12 +170,10 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
     }
   };
 
-  const onDateClick = (day) => {
-    setSelectedDate(day);
-  };
   const nextMonth = () => {
     setCurrentMonth(dateFns.addMonths(currentMonth, 1));
   };
+
   const prevMonth = () => {
     setCurrentMonth(dateFns.subMonths(currentMonth, 1));
   };
@@ -177,11 +188,12 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
   const handleChange = (e) => {
     setJumpDate(e.target.value);
   };
+
   return (
     <div className="calendar">
       {modalToggled ? (
         <div style={{ filter: "blur(2.5px)" }}>
-          <div style={{ padding: "5px" }}>
+          <div className="p-5">
             <input type="month" id="start" name="start" />
             <button>Go</button>
           </div>
@@ -190,8 +202,8 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
           {renderCells()}
         </div>
       ) : (
-        <div>
-          <div style={{ padding: "5px" }}>
+        <>
+          <div className="p-5">
             <input
               type="month"
               id="start"
@@ -210,7 +222,7 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
           {renderHeader()}
           {renderDays()}
           {renderCells()}
-        </div>
+        </>
       )}
     </div>
   );
