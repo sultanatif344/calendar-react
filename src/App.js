@@ -1,5 +1,4 @@
 import { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Calendar from "./components/calendar.jsx";
 import Modal from "./components/modal";

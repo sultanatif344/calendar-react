@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as dateFns from "date-fns";
-import Modal from "./modal";
-import { ShowModal } from "../functions";
+
 const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -87,65 +86,60 @@ const Calendar = ({ changeColor, toggleModal, modalToggled }) => {
                 : ""
             }`}
             key={day}
-            // onClick={() => onDateClick(dateFns.parse(cloneDay))}
           >
             <span className="number">{formattedDate}</span>
             <span className="bg">{formattedDate}</span>
             <br />
 
             {dateFns.isSameMonth(day, monthStart) ? (
-              <button
-                style={{
-                  backgroundColor: "blue",
-                  border: "none",
-                  width: "90%",
-                  height: "20%",
-                  marginLeft: "10px",
-                }}
-                onClick={() => [changeColor("blue"), toggleModal(true)]}
-              ></button>
+              <div className="relative">
+                <input type="checkbox" className="top-2 left-4 absolute" />
+                <button
+                  className="bg-blue-800 w-48 h-auto ml-1.5 text-xs text-white px-7 py-1.5 text-left"
+                  onClick={() => [changeColor("blue"), toggleModal(true)]}
+                >
+                  First Shift | 9am - 3pm
+                </button>
+              </div>
             ) : (
               <div></div>
             )}
             {dateFns.isSameMonth(day, monthStart) ? (
-              <button
-                style={{
-                  backgroundColor: "lightGreen",
-                  border: "none",
-                  width: "90%",
-                  height: "20%",
-                  marginLeft: "10px",
-                }}
-                onClick={() => [changeColor("lightGreen"), toggleModal(true)]}
-              ></button>
+              <div className="relative">
+                <input type="checkbox" className="top-2 left-4 absolute" />
+                <button
+                  className="bg-green-400 w-48 h-auto ml-1.5 text-xs text-white px-7 py-1.5 text-left"
+                  onClick={() => [changeColor("lightGreen"), toggleModal(true)]}
+                >
+                  Second Shift | 3pm - 6pm
+                </button>
+              </div>
             ) : (
               <div></div>
             )}
             {dateFns.isSameMonth(day, monthStart) ? (
-              <button
-                style={{
-                  backgroundColor: "orange",
-                  border: "none",
-                  width: "90%",
-                  height: "20%",
-                  marginLeft: "10px",
-                }}
-                onClick={() => [changeColor("orange"), toggleModal(true)]}
-              ></button>
+              <div className="relative">
+                <input type="checkbox" className="top-2 left-4 absolute" />
+                <button
+                  className="bg-orange-400 w-48 h-auto ml-1.5 text-xs text-white px-7 py-1.5 text-left"
+                  onClick={() => [changeColor("orange"), toggleModal(true)]}
+                >
+                  Third Shift | 6pm - 9pm
+                </button>
+              </div>
             ) : (
               <div></div>
             )}
             {dateFns.isSameMonth(day, monthStart) ? (
-              <button
-                style={{
-                  backgroundColor: "pink",
-                  border: "none",
-                  width: "90%",
-                  height: "20%",
-                  marginLeft: "10px",
-                }}
-                onClick={() => [changeColor("pink"), toggleModal(true)]}
-              ></button>
+              <div className="relative">
+                <input type="checkbox" className="top-2 left-4 absolute" />
+                <button
+                  className="bg-pink-400 w-48 h-auto ml-1.5 text-xs text-white px-7 py-1.5 text-left"
+                  onClick={() => [changeColor("pink"), toggleModal(true)]}
+                >
+                  Custom Shift | Design
+                </button>
+              </div>
             ) : (
               <div></div>
             )}
